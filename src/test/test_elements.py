@@ -150,8 +150,14 @@ class ElementsTests(unittest.TestCase):
         explicit_sjproof, explicit_sjproof_len = make_cbuffer('00' * ASSET_EXPLICIT_SURJECTIONPROOF_LEN)
         ret = wally_explicit_surjectionproof(UNBLINDED_ASSET, UNBLINDED_ASSET_LEN,
                                              output_abf, output_abf_len,
-                                             generator, generator_len,
+                                             output_generator, output_generator_len,
                                              explicit_sjproof, explicit_sjproof_len)
+        self.assertEqual(ret, WALLY_OK)
+
+        # explicit_surjectionproof_verify
+        ret = wally_explicit_surjectionproof_verify(explicit_sjproof, explicit_sjproof_len,
+                                                    UNBLINDED_ASSET, UNBLINDED_ASSET_LEN,
+                                                    output_generator, output_generator_len)
         self.assertEqual(ret, WALLY_OK)
 
 
