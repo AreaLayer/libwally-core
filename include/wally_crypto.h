@@ -507,7 +507,7 @@ WALLY_CORE_API int wally_ec_scalar_verify(
     size_t scalar_len);
 
 /**
- * Add one secp256k1 scalar from another modulo the secp256k1 group size.
+ * Add one secp256k1 scalar to another.
  *
  * :param scalar: The starting scalar to have a value added to.
  * :param scalar_len: The length of ``scalar`` in bytes. Must be ``EC_SCALAR_LEN``.
@@ -528,7 +528,7 @@ WALLY_CORE_API int wally_ec_scalar_add(
     size_t len);
 
 /**
- * Subtract one secp256k1 scalar from another modulo the secp256k1 group size.
+ * Subtract one secp256k1 scalar from another.
  *
  * :param scalar: The starting scalar to have a value subtract from.
  * :param scalar_len: The length of ``scalar`` in bytes. Must be ``EC_SCALAR_LEN``.
@@ -549,7 +549,7 @@ WALLY_CORE_API int wally_ec_scalar_subtract(
     size_t len);
 
 /**
- * Multiply one secp256k1 scalar by another modulo the secp256k1 group size.
+ * Multiply one secp256k1 scalar by another.
  *
  * :param scalar: The starting scalar to multiply.
  * :param scalar_len: The length of ``scalar`` in bytes. Must be ``EC_SCALAR_LEN``.
@@ -568,6 +568,41 @@ WALLY_CORE_API int wally_ec_scalar_multiply(
     size_t operand_len,
     unsigned char *bytes_out,
     size_t len);
+
+#ifndef SWIG
+/**
+ * Add one secp256k1 scalar to another in place.
+ *
+ * .. note:: As per `wally_ec_scalar_add` with ``scalar`` modified in place.
+ */
+WALLY_CORE_API int wally_ec_scalar_add_to(
+    unsigned char *scalar,
+    size_t scalar_len,
+    const unsigned char *operand,
+    size_t operand_len);
+
+/**
+ * Subtract one secp256k1 scalar from another in place.
+ *
+ * .. note:: As per `wally_ec_scalar_subtract` with ``scalar`` modified in place.
+ */
+WALLY_CORE_API int wally_ec_scalar_subtract_from(
+    unsigned char *scalar,
+    size_t scalar_len,
+    const unsigned char *operand,
+    size_t operand_len);
+
+/**
+ * Multiply one secp256k1 scalar by another in place.
+ *
+ * .. note:: As per `wally_ec_scalar_multiply` with ``scalar`` modified in place.
+ */
+WALLY_CORE_API int wally_ec_scalar_multiply_by(
+    unsigned char *scalar,
+    size_t scalar_len,
+    const unsigned char *operand,
+    size_t operand_len);
+#endif /* SWIG */
 
 /** The maximum size of input message that can be formatted */
 #define BITCOIN_MESSAGE_MAX_LEN (64 * 1024 - 64)
