@@ -51,7 +51,8 @@ WALLY_CORE_API int wally_asset_generator_from_bytes(
  * :param len: Length of ``bytes_out``. Must be ``SHA256_LEN``.
  *
  * .. note:: The public blinding key can be retrieved from a confidential
- *|    address using `wally_confidential_addr_to_ec_public_key`.
+ *|    address using `wally_confidential_addr_to_ec_public_key`. If `priv_key`
+ *|    is invalid, then ``WALLY_ERROR`` is returned.
  */
 WALLY_CORE_API int wally_ecdh_nonce_hash(
     const unsigned char *pub_key,
